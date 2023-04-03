@@ -1,2 +1,2 @@
-# TgTrainingBot
-telegram bot (training)
+# My telegram bot for training
+My telegram bot for training
