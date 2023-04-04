@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	token := os.Getenv("MYTOKEN")
+	token := os.Getenv("TOKEN")
 
 	bot, err := tgbotapi.NewBotAPI(token)
 	if err != nil {
@@ -28,20 +28,27 @@ func main() {
 			continue
 		}
 
+		var outputMessage tgbotapi.MessageConfig
+
 		switch update.Message.Command() {
 		case "help":
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Write something and bot will repeat it")
-			_, err := bot.Send(msg)
-			if err != nil {
-				log.Panic(err)
-			}
+			outputMessage = helpCommand(update.Message)
 		default:
-			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "You wrote: "+update.Message.Text)
-			_, err := bot.Send(msg)
-			if err != nil {
-				log.Panic(err)
-			}
+			outputMessage = defaultBehaviour(update.Message)
+		}
+
+		_, err := bot.Send(outputMessage)
+		if err != nil {
+			log.Panic(err)
 		}
 	}
+}
+
+func helpCommand(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
+	return tgbotapi.NewMessage(inputMessage.Chat.ID, "Write something and bot will repeat it")
+}
+
+func defaultBehaviour(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
+	log.Printf("[%s] %s", inputMessage.From.UserName, inputMessage.Text)
+	return tgbotapi.NewMessage(inputMessage.Chat.ID, "You wrote: "+inputMessage.Text)
 }
