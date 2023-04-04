@@ -6,8 +6,6 @@ import (
 	"os"
 )
 
-//const token = "6214857345:AAGwaM97QOYAl6eBZ4603mxForwD3AZe8YU"
-
 func main() {
 	token := os.Getenv("MYTOKEN")
 
@@ -26,12 +24,20 @@ func main() {
 	updates := bot.GetUpdatesChan(u)
 
 	for update := range updates {
-		if update.Message != nil { // If we got a message
+		if update.Message == nil { // ignore any non-message updates
+			continue
+		}
+
+		switch update.Message.Command() {
+		case "help":
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Write something and bot will repeat it")
+			_, err := bot.Send(msg)
+			if err != nil {
+				log.Panic(err)
+			}
+		default:
 			log.Printf("[%s] %s", update.Message.From.UserName, update.Message.Text)
-
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "You wrote: "+update.Message.Text)
-			//msg.ReplyToMessageID = update.Message.MessageID // bot replies to the previous message
-
 			_, err := bot.Send(msg)
 			if err != nil {
 				log.Panic(err)
