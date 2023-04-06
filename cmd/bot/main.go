@@ -1,6 +1,7 @@
 package main
 
 import (
+	"TgTrainingBot/internal/app/commands"
 	"TgTrainingBot/internal/service/product"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
@@ -35,11 +36,11 @@ func main() {
 
 		switch update.Message.Command() {
 		case "help":
-			outputMessage = helpCommand(update.Message)
+			outputMessage = commands.HelpCommand(update.Message)
 		case "list":
-			outputMessage = listCommand(update.Message, productService)
+			outputMessage = commands.ListCommand(update.Message, productService)
 		default:
-			outputMessage = defaultBehaviour(update.Message)
+			outputMessage = commands.DefaultBehaviour(update.Message)
 		}
 
 		_, err := bot.Send(outputMessage)
@@ -47,27 +48,4 @@ func main() {
 			log.Panic(err)
 		}
 	}
-}
-
-func helpCommand(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
-	return tgbotapi.NewMessage(inputMessage.Chat.ID, "Write something and bot will repeat it\n"+
-		"List of available commands: \n"+
-		"/help - help info\n"+
-		"/list - list of products")
-}
-
-func listCommand(inputMessage *tgbotapi.Message, productService *product.Service) tgbotapi.MessageConfig {
-	outputMsgText := "Here are all the products:\n\n"
-
-	products := productService.List()
-	for _, p := range products {
-		outputMsgText += p.Title
-		outputMsgText += "\n"
-	}
-	return tgbotapi.NewMessage(inputMessage.Chat.ID, outputMsgText)
-}
-
-func defaultBehaviour(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
-	log.Printf("[%s] %s", inputMessage.From.UserName, inputMessage.Text)
-	return tgbotapi.NewMessage(inputMessage.Chat.ID, "You wrote: "+inputMessage.Text)
 }
