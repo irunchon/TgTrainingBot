@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func DefaultBehaviour(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
+func (c *Commander) noCommand(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
 	log.Printf("[%s] %s", inputMessage.From.UserName, inputMessage.Text)
 	return tgbotapi.NewMessage(inputMessage.Chat.ID, "You wrote: "+inputMessage.Text)
 }

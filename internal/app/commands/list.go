@@ -1,14 +1,13 @@
 package commands
 
 import (
-	"TgTrainingBot/internal/service/product"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func ListCommand(inputMessage *tgbotapi.Message, productService *product.Service) tgbotapi.MessageConfig {
+func (c *Commander) list(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
 	outputMsgText := "Here are all the products:\n\n"
+	products := c.productService.List()
 
-	products := productService.List()
 	for _, p := range products {
 		outputMsgText += p.Title
 		outputMsgText += "\n"
