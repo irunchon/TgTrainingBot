@@ -23,11 +23,23 @@ func (c *Commander) handleMessage(update tgbotapi.Update) {
 		}
 	}()
 
-	if update.Message == nil { // ignore any non-message updates
+	var outputMessage tgbotapi.MessageConfig
+
+	if update.CallbackQuery != nil {
+		outputMessage = tgbotapi.NewMessage(
+			update.CallbackQuery.Message.Chat.ID,
+			"Data: "+update.CallbackQuery.Data,
+		)
+		_, err := c.bot.Send(outputMessage)
+		if err != nil {
+			log.Panic(err)
+		}
 		return
 	}
 
-	var outputMessage tgbotapi.MessageConfig
+	if update.Message == nil { // ignore any non-message updates
+		return
+	}
 
 	switch update.Message.Command() {
 	case "help":
