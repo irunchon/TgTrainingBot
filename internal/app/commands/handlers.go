@@ -17,6 +17,12 @@ func (c *Commander) HandleUpdates() {
 }
 
 func (c *Commander) handleMessage(update tgbotapi.Update) {
+	defer func() {
+		if panicValue := recover(); panicValue != nil {
+			log.Printf("Recovered from panic: %v", panicValue)
+		}
+	}()
+
 	if update.Message == nil { // ignore any non-message updates
 		return
 	}
@@ -28,6 +34,8 @@ func (c *Commander) handleMessage(update tgbotapi.Update) {
 		outputMessage = c.help(update.Message)
 	case "list":
 		outputMessage = c.list(update.Message)
+	case "get":
+		outputMessage = c.get(update.Message)
 	default:
 		outputMessage = c.noCommand(update.Message)
 	}

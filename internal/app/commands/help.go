@@ -6,5 +6,6 @@ func (c *Commander) help(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig 
 	return tgbotapi.NewMessage(inputMessage.Chat.ID, "Write something and bot will repeat it\n"+
 		"List of available commands: \n"+
 		"/help - help info\n"+
-		"/list - list of products")
+		"/list - list of products\n"+
+		"/get - get info")
 }
