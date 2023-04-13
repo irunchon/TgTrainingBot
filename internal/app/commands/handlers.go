@@ -24,24 +24,15 @@ func (c *Commander) handleMessage(update tgbotapi.Update) {
 		}
 	}()
 
-	var outputMessage tgbotapi.MessageConfig
-
 	if update.CallbackQuery != nil {
-		outputMessage = tgbotapi.NewMessage(
-			update.CallbackQuery.Message.Chat.ID,
-			fmt.Sprintf("Offset: %s", update.CallbackQuery.Data),
-		)
-
-		_, err := c.bot.Send(outputMessage)
-		if err != nil {
-			log.Panic(err)
-		}
-		return
+		c.handleCallback(update)
 	}
 
 	if update.Message == nil { // ignore any non-message updates
 		return
 	}
+
+	var outputMessage tgbotapi.MessageConfig
 
 	switch update.Message.Command() {
 	case "help":
@@ -54,6 +45,17 @@ func (c *Commander) handleMessage(update tgbotapi.Update) {
 		outputMessage = c.noCommand(update.Message)
 	}
 
+	_, err := c.bot.Send(outputMessage)
+	if err != nil {
+		log.Panic(err)
+	}
+}
+
+func (c *Commander) handleCallback(update tgbotapi.Update) {
+	outputMessage := tgbotapi.NewMessage(
+		update.CallbackQuery.Message.Chat.ID,
+		fmt.Sprintf("Offset: %s", update.CallbackQuery.Data),
+	)
 	_, err := c.bot.Send(outputMessage)
 	if err != nil {
 		log.Panic(err)
