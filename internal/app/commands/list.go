@@ -13,13 +13,13 @@ func (c *Commander) list(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig 
 		outputMsgText += "\n"
 	}
 
-	msg := tgbotapi.NewMessage(inputMessage.Chat.ID, outputMsgText)
+	outputMessage := tgbotapi.NewMessage(inputMessage.Chat.ID, outputMsgText)
 
-	msg.ReplyMarkup = tgbotapi.NewInlineKeyboardMarkup(
+	outputMessage.ReplyMarkup = tgbotapi.NewInlineKeyboardMarkup(
 		tgbotapi.NewInlineKeyboardRow(
-			tgbotapi.NewInlineKeyboardButtonData("Next page", "some data"),
+			tgbotapi.NewInlineKeyboardButtonData("Next page", "123"),
 		),
 	)
 
-	return msg
+	return outputMessage
 }
