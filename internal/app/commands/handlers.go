@@ -53,6 +53,12 @@ func (c *Commander) handleMessage(update tgbotapi.Update) {
 		outputMessage = c.list(update.Message)
 	case "get":
 		outputMessage = c.get(update.Message)
+	case "delete":
+		outputMessage = c.delete(update.Message)
+	case "new":
+		outputMessage = c.new(update.Message)
+	case "edit":
+		outputMessage = c.edit(update.Message)
 	default:
 		outputMessage = c.noCommand(update.Message)
 	}
