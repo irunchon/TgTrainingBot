@@ -35,7 +35,7 @@ func (c *Commander) handleSingleUpdate(update tgbotapi.Update) {
 func (c *Commander) handleCallback(update tgbotapi.Update) {
 	outputMessage := tgbotapi.NewMessage(
 		update.CallbackQuery.Message.Chat.ID,
-		fmt.Sprintf("Offset: %s", update.CallbackQuery.Data),
+		fmt.Sprintf("Offset: %s (functionality TBD)", update.CallbackQuery.Data),
 	)
 	_, err := c.bot.Send(outputMessage)
 	if err != nil {
