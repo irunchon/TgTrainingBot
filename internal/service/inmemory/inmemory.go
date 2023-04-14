@@ -29,10 +29,18 @@ func (s *Service) Create(newProduct model.Product) uint64 {
 	return uint64(len(model.AllProducts) - 1)
 }
 
-func (s *Service) Remove(ID uint64) (bool, error) {
+func (s *Service) Remove(ID uint64) error {
 	if ID > uint64(len(model.AllProducts)-1) || ID < 0 {
-		return false, ErrNotFound
+		return ErrNotFound
 	}
 	model.AllProducts = append(model.AllProducts[:ID], model.AllProducts[ID+1:]...)
-	return true, nil
+	return nil
+}
+
+func (s *Service) Update(ID uint64, update model.Product) error {
+	if ID > uint64(len(model.AllProducts)-1) || ID < 0 {
+		return ErrNotFound
+	}
+	model.AllProducts[ID].Title = update.Title
+	return nil
 }

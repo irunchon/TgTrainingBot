@@ -13,7 +13,7 @@ func (c *Commander) new(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
 		return tgbotapi.NewMessage(inputMessage.Chat.ID, "Empty argument. New product cannot be added")
 	}
 
-	newProductID := c.Service.Create(model.Product{Title: args})
+	newProductID := c.service.Create(model.Product{Title: args})
 
 	return tgbotapi.NewMessage(
 		inputMessage.Chat.ID,

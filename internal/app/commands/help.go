@@ -7,9 +7,9 @@ func (c *Commander) help(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig 
 		"List of available commands: \n"+
 			"/help — help info\n"+
 			"/list — list of products\n"+
-			"/get — get info\n"+
-			"/delete — delete an existing entity\n"+
-			"/new — create a new entity\n"+
-			"/edit — edit an entity\n"+
-			"\n or just write something and bot will repeat it")
+			"/get — get product info by ID\n"+
+			"/delete — delete an existing entity by ID\n"+
+			"/new — add new product\n"+
+			"/edit — edit an existing product by ID\n"+
+			"\n or just write something and bot will repeat it :)")
 }
