@@ -2,7 +2,7 @@ package main
 
 import (
 	"TgTrainingBot/internal/app/commands"
-	"TgTrainingBot/internal/service/product"
+	service "TgTrainingBot/internal/service/inmemory"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
 	"os"
@@ -20,8 +20,8 @@ func main() {
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
 
-	productService := product.NewService()
+	productService := service.NewService()
 	commander := commands.NewCommander(bot, productService)
-	
+
 	commander.HandleUpdates()
 }

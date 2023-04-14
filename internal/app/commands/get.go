@@ -19,7 +19,7 @@ func (c *Commander) get(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
 	product, err := c.productService.Get(idx)
 
 	if err != nil {
-		log.Printf("Fail to get product with idx = %d: %v", idx, err)
+		log.Printf("Fail to get inmemory with idx = %d: %v", idx, err)
 		return tgbotapi.NewMessage(
 			inputMessage.Chat.ID,
 			fmt.Sprintf("Error! %v", err),
