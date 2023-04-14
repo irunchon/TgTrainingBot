@@ -3,25 +3,23 @@ package inmemory
 import (
 	"TgTrainingBot/internal/service/model"
 	"errors"
-	"fmt"
 )
 
-type InMemoryService struct{}
+var ErrNotFound = errors.New("not found")
 
-func NewService() *InMemoryService {
-	return &InMemoryService{}
+type Service struct{}
+
+func NewService() *Service {
+	return &Service{}
 }
 
-func (s *InMemoryService) List() []model.Product {
+func (s *Service) List() []model.Product {
 	return model.AllProducts
 }
 
-func (s *InMemoryService) Get(idx int) (*model.Product, error) {
-	if idx > len(model.AllProducts)-1 {
-		return nil, errors.New(fmt.Sprintf("idx = %d is out of range", idx))
-	}
-	if idx < 0 {
-		return nil, errors.New(fmt.Sprintf("idx = %d is negative", idx))
+func (s *Service) Get(idx uint64) (*model.Product, error) {
+	if idx > uint64(len(model.AllProducts)-1) || idx < 0 {
+		return nil, ErrNotFound
 	}
 	return &model.AllProducts[idx], nil
 }
