@@ -16,8 +16,11 @@ func (s *Service) List() []Product {
 }
 
 func (s *Service) Get(idx int) (*Product, error) {
-	if idx > len(allProducts)-1 || idx < 0 {
-		return nil, errors.New(fmt.Sprintf("Wrong product idx = %d", idx))
+	if idx > len(allProducts)-1 {
+		return nil, errors.New(fmt.Sprintf("idx = %d is out of range", idx))
+	}
+	if idx < 0 {
+		return nil, errors.New(fmt.Sprintf("idx = %d is negative", idx))
 	}
 	return &allProducts[idx], nil
 }

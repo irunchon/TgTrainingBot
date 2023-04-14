@@ -13,7 +13,7 @@ func (c *Commander) get(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
 
 	if err != nil {
 		log.Printf("Wrong argument: %s", args)
-		return tgbotapi.NewMessage(inputMessage.Chat.ID, "Wrong argument!")
+		return tgbotapi.NewMessage(inputMessage.Chat.ID, "Argument should be a number")
 	}
 
 	product, err := c.productService.Get(idx)
@@ -22,7 +22,7 @@ func (c *Commander) get(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {
 		log.Printf("Fail to get product with idx = %d: %v", idx, err)
 		return tgbotapi.NewMessage(
 			inputMessage.Chat.ID,
-			fmt.Sprintf("Fail to get product with idx = %d", idx),
+			fmt.Sprintf("Error! %v", err),
 		)
 	}
 	return tgbotapi.NewMessage(
