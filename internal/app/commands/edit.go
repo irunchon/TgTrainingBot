@@ -1,11 +1,13 @@
 package commands
 
 import (
-	"TgTrainingBot/internal/service/model"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
 	"strconv"
 	"strings"
+
+	"github.com/irunchon/TgTrainingBot/internal/service/model"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 func (c *Commander) edit(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {

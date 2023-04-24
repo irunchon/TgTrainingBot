@@ -1,12 +1,13 @@
 package main
 
 import (
-	"TgTrainingBot/internal/app/commands"
-	"TgTrainingBot/internal/service/inmemory"
 	"fmt"
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"log"
 	"os"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/irunchon/TgTrainingBot/internal/app/commands"
+	"github.com/irunchon/TgTrainingBot/internal/service/inmemory"
 )
 
 func main() {

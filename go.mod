@@ -1,4 +1,4 @@
-module TgTrainingBot
+module github.com/irunchon/TgTrainingBot
 
 go 1.19
 

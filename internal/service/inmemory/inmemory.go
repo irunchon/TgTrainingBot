@@ -1,8 +1,9 @@
 package inmemory
 
 import (
-	"TgTrainingBot/internal/service/model"
 	"errors"
+
+	"github.com/irunchon/TgTrainingBot/internal/service/model"
 )
 
 var ErrNotFound = errors.New("not found")

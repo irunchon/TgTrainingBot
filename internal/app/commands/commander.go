@@ -1,7 +1,8 @@
 package commands
 
 import (
-	"TgTrainingBot/internal/service"
+	"github.com/irunchon/TgTrainingBot/internal/service"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 

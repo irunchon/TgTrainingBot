@@ -1,9 +1,10 @@
 package commands
 
 import (
-	"TgTrainingBot/internal/service/model"
 	"fmt"
+
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/irunchon/TgTrainingBot/internal/service/model"
 )
 
 func (c *Commander) new(inputMessage *tgbotapi.Message) tgbotapi.MessageConfig {

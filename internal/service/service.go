@@ -1,6 +1,6 @@
 package service
 
-import "TgTrainingBot/internal/service/model"
+import "github.com/irunchon/TgTrainingBot/internal/service/model"
 
 type Service interface {
 	List() []model.Product
