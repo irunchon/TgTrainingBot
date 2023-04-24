@@ -29,4 +29,4 @@ Bot repeats the text sent to it. Also, there are some commands available:
   result: Product was successfully updated
 
 For launching the bot .env file with your bot token should be created in the project's root directory. Format of .env file:  
-TOKEN=<your token>  
+TOKEN=[your token]  
